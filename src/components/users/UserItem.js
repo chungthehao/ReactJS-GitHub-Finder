@@ -1,28 +1,8 @@
 import React, { Component } from 'react';
 
 class UserItem extends Component {
-  constructor() {
-    super();
-
-    // Component level state
-    // this.state = {
-    //   id: 'id',
-    //   login: 'mojombo',
-    //   avatar_url: 'https://avatars0.githubusercontent.com/u/1?v=4',
-    //   html_url: 'https://github.com/mojombo'
-    // };
-  }
-
-  // Ko để trong constructor cũng đc
-  state = {
-    id: 'id',
-    login: 'mojombo',
-    avatar_url: 'https://avatars0.githubusercontent.com/u/1?v=4',
-    html_url: 'https://github.com/mojombo'
-  };
-
   render() {
-    const { login, avatar_url, html_url } = this.state;
+    const { login, avatar_url, html_url } = this.props.user;
 
     return (
       <div className='card text-center'>
