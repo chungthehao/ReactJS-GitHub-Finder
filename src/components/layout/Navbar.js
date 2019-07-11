@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'; // Kiểu của props đc truyền vào, required hay ko, ...
 
-export class Navbar extends Component {
-  // Nếu bên ngoài ko truyền props vào thì mặc định dùng ở đây.
-  static defaultProps = {
-    title: 'GitHub Finder',
-    icon: 'fab fa-github'
-  };
+const Navbar = ({ icon, title }) => {
+  return (
+    <nav className='navbar bg-primary'>
+      <h1>
+        <i className={icon} /> {title}
+      </h1>
+    </nav>
+  );
+};
 
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired
-  };
+// Nếu bên ngoài ko truyền props vào thì mặc định dùng ở đây.
+Navbar.defaultProps = {
+  title: 'GitHub Finder',
+  icon: 'fab fa-github'
+};
 
-  render() {
-    return (
-      <nav className='navbar bg-primary'>
-        <h1>
-          <i className={this.props.icon} /> {this.props.title}
-        </h1>
-      </nav>
-    );
-  }
-}
+Navbar.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired
+};
 
 export default Navbar;
