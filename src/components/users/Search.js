@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 class Search extends Component {
@@ -7,7 +7,9 @@ class Search extends Component {
   };
 
   static propTypes = {
-    searchUsers: PropTypes.func.isRequired
+    searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClearBtn: PropTypes.bool.isRequired
   };
 
   // Phải dùng arrow func để xài 'this' bên trong
@@ -23,21 +25,31 @@ class Search extends Component {
   };
 
   render() {
+    const { showClearBtn, clearUsers } = this.props;
+
     return (
-      <form onSubmit={this.onSubmit} className='form'>
-        <input
-          type='text'
-          name='text'
-          placeholder='Search Users...'
-          value={this.state.text}
-          onChange={this.onChange}
-        />
-        <input
-          type='submit'
-          value='Search'
-          className='btn btn-dark btn-block'
-        />
-      </form>
+      <div>
+        <form onSubmit={this.onSubmit} className='form'>
+          <input
+            type='text'
+            name='text'
+            placeholder='Search Users...'
+            value={this.state.text}
+            onChange={this.onChange}
+          />
+          <input
+            type='submit'
+            value='Search'
+            className='btn btn-dark btn-block'
+          />
+        </form>
+
+        {showClearBtn && (
+          <button className='btn btn-light btn-block' onClick={clearUsers}>
+            Clear
+          </button>
+        )}
+      </div>
     );
   }
 }
