@@ -71,7 +71,12 @@ class User extends Component {
               </Fragment>
             )}
 
-            <a href={html_url} target='_blank' className='btn btn-dark my-1'>
+            <a
+              href={html_url}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='btn btn-dark my-1'
+            >
               Visit GitHub Profile
             </a>
 

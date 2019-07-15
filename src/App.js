@@ -42,7 +42,7 @@ class App extends Component {
       }&q=${searchText}`
     );
 
-    this.setState({ userRepos: res.data.items, loading: false });
+    this.setState({ users: res.data.items, loading: false });
   };
 
   // Get single GitHub user
