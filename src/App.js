@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
+import Alert from './components/layout/Alert';
 import axios from 'axios';
 import './App.css';
 
 class App extends Component {
   state = {
     users: [],
-    loading: false
+    loading: false,
+    alert: null // Khi đâu đó gọi setAlert sẽ manipulate cái này.
   };
 
   /*async componentDidMount() {
@@ -43,6 +45,16 @@ class App extends Component {
     this.setState({ users: [], loading: false });
   };
 
+  // Set Alert
+  setAlert = (msg, type) => {
+    this.setState({ alert: { msg, type } });
+
+    // Sau 1 khoảng thời gian thì reset this.state.alert để remove cái alert đã hiện, chứ k nó ở đó quài.
+    setTimeout(() => {
+      this.setState({ alert: null });
+    }, 2500);
+  };
+
   render() {
     const { users, loading } = this.state;
 
@@ -50,10 +62,12 @@ class App extends Component {
       <div className='App'>
         <Navbar />
         <div className='container'>
+          <Alert alert={this.state.alert} />
           <Search
             searchUsers={this.searchUsers}
             clearUsers={this.clearUsers}
             showClearBtn={users.length ? true : false}
+            setAlert={this.setAlert}
           />
           <Users loading={loading} users={users} />
         </div>

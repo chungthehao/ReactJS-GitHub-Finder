@@ -9,7 +9,8 @@ class Search extends Component {
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
-    showClearBtn: PropTypes.bool.isRequired
+    showClearBtn: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired
   };
 
   // Phải dùng arrow func để xài 'this' bên trong
@@ -20,8 +21,12 @@ class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.searchUsers(this.state.text); // Pass data to App
-    this.setState({ text: '' }); // clear the form input
+    if (this.state.text === '') {
+      this.props.setAlert('Please enter something to search!', 'light');
+    } else {
+      this.props.searchUsers(this.state.text); // Pass data to App
+      this.setState({ text: '' }); // clear the form input
+    }
   };
 
   render() {
