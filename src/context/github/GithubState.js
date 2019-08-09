@@ -26,7 +26,25 @@ const GithubState = props => {
   // In order to dispatch a type back to our reducer
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
-  // Search users
+  // Search GitHub users
+  const searchUsers = async searchText => {
+    setLoading();
+
+    const res = await axios.get(
+      `https://api.github.com/search/users?client_id=${
+        process.env.REACT_APP_GITHUB_CLIENT_ID
+      }&client_secret=${
+        process.env.REACT_APP_GITHUB_CLIENT_SECRET
+      }&q=${searchText}`
+    );
+
+    //setUsers(res.data.items);
+    dispatch({
+      type: SEARCH_USERS,
+      payload: res.data.items
+    });
+    // Our reducer is gonna be reponsible of putting this into our state & sending it down to any components that need it
+  };
 
   // Get user
 
@@ -35,6 +53,7 @@ const GithubState = props => {
   // clear users
 
   // Set loading
+  const setLoading = () => dispatch({ type: SET_LOADING });
 
   // Wrap our entire app with the provider, rồi truyền state dưới dạng prop value vô
   return (
@@ -43,7 +62,8 @@ const GithubState = props => {
         users: state.users,
         user: state.user,
         repos: state.repos,
-        loading: state.loading
+        loading: state.loading,
+        searchUsers
       }}
     >
       {props.children}
