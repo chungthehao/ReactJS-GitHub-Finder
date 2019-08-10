@@ -1,9 +1,13 @@
 import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Search = ({ setAlert }) => {
+const Search = props => {
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
   // Initialize githubContext
   const githubContext = useContext(GithubContext);
   const { searchUsers, users, clearUsers } = githubContext;
@@ -56,10 +60,10 @@ const Search = ({ setAlert }) => {
   );
 };
 
-Search.propTypes = {
-  // clearUsers: PropTypes.func.isRequired,
-  // showClearBtn: PropTypes.bool.isRequired,
-  setAlert: PropTypes.func.isRequired
-};
+// Search.propTypes = {
+// clearUsers: PropTypes.func.isRequired,
+// showClearBtn: PropTypes.bool.isRequired,
+// setAlert: PropTypes.func.isRequired
+// };
 
 export default Search;
