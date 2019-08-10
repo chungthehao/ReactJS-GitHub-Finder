@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+// import PropTypes from 'prop-types';
+
 import UserItem from './UserItem';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
 
-const Users = ({ users, loading }) => {
+import GithubContext from '../../context/github/githubContext';
+
+const Users = props => {
+  // Initialize GithubContext
+  const githubContext = useContext(GithubContext);
+  const { users, loading } = githubContext;
+
   if (loading) {
     return <Spinner />;
   }
@@ -16,10 +23,11 @@ const Users = ({ users, loading }) => {
   );
 };
 
-Users.propTypes = {
-  users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired
-};
+// - Ko còn truyền users, loading vô component này qua props nữa!
+// Users.propTypes = {
+//   users: PropTypes.array.isRequired,
+//   loading: PropTypes.bool.isRequired
+// };
 
 const userStyle = {
   display: 'grid',
