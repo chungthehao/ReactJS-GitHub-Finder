@@ -18,8 +18,8 @@ import {
 let githubClientId;
 let githubClientSecret;
 
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV !== 'production') {
-  console.log(process.env.NODE_ENV);
   // Xài info ở file .env.local
   githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
   githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
