@@ -15,6 +15,19 @@ import {
   GET_REPOS
 } from '../types';
 
+let githubClientId;
+let githubClientSecret;
+
+if (process.env.NODE_ENV !== 'production') {
+  // Xài info ở file .env.local
+  githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+  githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+} else {
+  // Xài info đc setup trên Netlify
+  githubClientId = process.env.GITHUB_CLIENT_ID;
+  githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+}
+
 const GithubState = props => {
   const initialState = {
     user: {},
@@ -31,11 +44,7 @@ const GithubState = props => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/search/users?client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${
-        process.env.REACT_APP_GITHUB_CLIENT_SECRET
-      }&q=${searchText}`
+      `https://api.github.com/search/users?client_id=${githubClientId}&client_secret=${githubClientSecret}&q=${searchText}`
     );
 
     //setUsers(res.data.items);
@@ -51,9 +60,7 @@ const GithubState = props => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
 
     dispatch({
@@ -67,9 +74,7 @@ const GithubState = props => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID
-      }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
 
     dispatch({
