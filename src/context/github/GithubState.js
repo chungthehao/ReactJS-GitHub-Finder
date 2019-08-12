@@ -25,8 +25,8 @@ if (process.env.NODE_ENV !== 'production') {
   githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
 } else {
   // Xài info đc setup trên Netlify
-  githubClientId = process.env.GITHUB_CLIENT_ID;
-  githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+  githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID_2;
+  githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET_2;
 }
 
 const GithubState = props => {
